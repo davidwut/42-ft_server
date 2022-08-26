@@ -25,13 +25,11 @@ openssl req\
 	-addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
 
 # Configure DB
-USER=root
 PASSWORD=password
 service mysql start
 mysql -e "CREATE DATABASE wordpress;"
 mysql -e "CREATE DATABASE phpmyadmin;"
-mysql -e "SET PASSWORD FOR '$USER'@'localhost' = PASSWORD('$PASSWORD');"
-mysql -e "GRANT ALL ON *.* TO '$USER'@'localhost' IDENTIFIED BY '$PASSWORD';"
+mysql -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$PASSWORD');"
 mysql -e "GRANT ALL on wordpress.* TO 'wp_user'@'localhost' IDENTIFIED BY '$PASSWORD';"
 mysql -e "GRANT ALL on phpmyadmin.* TO 'pma_user'@'localhost' IDENTIFIED BY '$PASSWORD';"
 mysql -e "FLUSH PRIVILEGES;"
