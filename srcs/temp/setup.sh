@@ -33,9 +33,12 @@ mysql -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$PASSWORD');"
 mysql -e "GRANT ALL on wordpress.* TO 'wp_user'@'localhost' IDENTIFIED BY '$PASSWORD';"
 mysql -e "GRANT ALL on phpmyadmin.* TO 'pma_user'@'localhost' IDENTIFIED BY '$PASSWORD';"
 mysql -e "FLUSH PRIVILEGES;"
-mysql wordpress < $ARCHIVES/wordpress.sql
+mysql -p$PASSWORD wordpress < $ARCHIVES/wordpress.sql
+mysql -p$PASSWORD phpmyadmin < $ARCHIVES/phpmyadmin.sql
 
 # Install wordpress
+# wordpress admin user is 42admin
+# subscriber is 42user
 mkdir -p $SERVER_DIR/wordpress
 tar -xf $WP --strip-components=1 -C $SERVER_DIR/wordpress
 mv $ARCHIVES/wp-config.php $SERVER_DIR/wordpress/
